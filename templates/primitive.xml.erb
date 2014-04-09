@@ -1,0 +1,27 @@
+<% if @clone -%>
+<clone id="<%= @cname %>">
+<meta_attributes id="<%= cname %>-meta">
+<%   @cloneparams.each { |p,v| -%>
+  <nvpair id="<%= @cname %>-<%= p %>" name="<%= p %>" value="<%= v %>"/>
+<%   } -%>
+</meta_attributes>
+<% end -%>
+<primitive class="<%= @class %>" id="<%= @pname %>" provider="<%= @provider %>" type="<%= @type %>">
+<% if @operations.is_a?(Hash) and @operations.size != 0 -%>
+  <operations>
+<%   @operations.each { |op,properties| -%>
+    <op id="<%= @pname %>-<%= op %>" name="<%= op %>" <% properties.each { |k,v| %><%= k %>="<%= v %>" <% } %>/>
+<%   } -%>
+  </operations>
+<% end -%>
+<% if @parameters.is_a?(Hash) and @parameters.size != 0 -%>
+  <instance_attributes id="<%= @pname %>-attributes">
+<%   @parameters.each { |p,v| -%>
+    <nvpair id="<%= @pname %>-<%= p %>" name="<%= p %>" value="<%= v %>"/>
+<%   } -%>
+  </instance_attributes>
+<% end -%>
+</primitive>
+<% if @clone -%>
+</clone>
+<% end -%>
