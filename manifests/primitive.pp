@@ -5,18 +5,19 @@
 # === Parameters
 #
 # [*class*]
-# Specify the resource class. Supported are: ocf, lsb, upstart, systemd,
-# fencing, service, nagios and stonith. Defaults to lsb.
+#   Specify the resource class. Supported are: ocf, lsb, upstart, systemd,
+#   fencing, service, nagios and stonith. Defaults to lsb.
 #
 # [*provider*]
-# The OCF spec allows multiple vendors to supply the same ResourceAgent.
-# To use the OCF resource agents supplied with Heartbeat, you should
-# specify heartbeat here.
+#   The OCF spec allows multiple vendors to supply the same ResourceAgent.
+#   To use the OCF resource agents supplied with Heartbeat, you should
+#   specify heartbeat here.
 #
 # [*type*]
-# The name of the Resource Agent you wish to use. Eg. IPaddr or Filesystem.
+#   The name of the Resource Agent you wish to use. Eg. IPaddr or Filesystem.
 #
 # [*parameters*]
+
 # [*operations*]
 #
 # === Variables
@@ -51,7 +52,7 @@
 #
 # === Copyright
 #
-# Copyright 2014 Arnoud de Jonge, unless otherwise noted.
+# Copyright 2014 Cyso.
 #
 
 define pacemaker::primitive (

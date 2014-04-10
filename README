@@ -1,5 +1,0 @@
-# pacemaker
-
-A module for installing and managing pacemaker. This module will install
-Pacemaker with Corosync. No other configurations are supported.
-

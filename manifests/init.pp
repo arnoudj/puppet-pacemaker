@@ -16,7 +16,7 @@
 #
 # === Copyright
 #
-# Copyright 2014 Arnoud de Jonge, unless otherwise noted.
+# Copyright 2014 Cyso.
 #
 class pacemaker inherits ::pacemaker::params {
   package { "corosync":

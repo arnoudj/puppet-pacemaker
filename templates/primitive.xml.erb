@@ -6,7 +6,7 @@
 <%   } -%>
 </meta_attributes>
 <% end -%>
-<primitive class="<%= @class %>" id="<%= @pname %>" provider="<%= @provider %>" type="<%= @type %>">
+<primitive class="<%= @class %>" id="<%= @pname %>" <%= "provider=\"#{@provider}\" " if not @provider.nil? %>type="<%= @type %>">
 <% if @operations.is_a?(Hash) and @operations.size != 0 -%>
   <operations>
 <%   @operations.each { |op,properties| -%>
