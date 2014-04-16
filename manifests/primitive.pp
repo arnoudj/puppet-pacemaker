@@ -4,9 +4,9 @@
 #
 # === Parameters
 #
-# [*class*]
-#   Specify the resource class. Supported are: ocf, lsb, upstart, systemd,
-#   fencing, service, nagios and stonith. Defaults to lsb.
+# [*scriptclass*]
+#   The standard the script conforms to. Allowed values: ocf, service, upstart, systemd, lsb, stonith.
+#   Default value is lsb.
 #
 # [*provider*]
 #   The OCF spec allows multiple vendors to supply the same ResourceAgent.
@@ -14,7 +14,14 @@
 #   specify heartbeat here.
 #
 # [*type*]
-#   The name of the Resource Agent you wish to use. Eg. IPaddr or Filesystem.
+#   The name of the Resource Agent you wish to use. Eg. IPaddr2 or Filesystem.
+#
+# [*targetrole*]
+#   What state should the cluster attempt to keep this resource in? Allowed values:
+#    * Stopped - Force the resource to be stopped
+#    * Started - Allow the resource to be started (In the case of multi-state resources, they will not promoted to master)
+#    * Master - Allow the resource to be started and, if appropriate, promoted
+#   Default value is "Started".
 #
 # [*parameters*]
 
@@ -56,9 +63,10 @@
 #
 
 define pacemaker::primitive (
-  $class       = "ocf",
+  $scriptclass = "ocf",
   $provider    = undef,
   $type,
+  $targetrole  = "Started",
   $parameters  = {},
   $operations  = {},
   $clone       = true,
@@ -77,7 +85,7 @@ define pacemaker::primitive (
   }
   ~>
   exec { "load p_${name}.xml":
-    command     => "cibadmin --modify --obj_type resources --xml-file /etc/corosync/xml/p_${name}.xml",
+    command     => "cibadmin --replace --obj_type resources --xml-file /etc/corosync/xml/p_${name}.xml || (rm /etc/corosync/xml/p_${name}.xml; exit 1)",
     unless      => "cibadmin --create --obj_type resources --xml-file /etc/corosync/xml/p_${name}.xml 2>/dev/null",
     path        => '/bin:/sbin:/usr/bin:/usr/sbin',
     refreshonly => true,

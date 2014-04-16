@@ -2,11 +2,12 @@
 <clone id="<%= @cname %>">
 <meta_attributes id="<%= cname %>-meta">
 <%   @cloneparams.each { |p,v| -%>
-  <nvpair id="<%= @cname %>-<%= p %>" name="<%= p %>" value="<%= v %>"/>
+  <nvpair id="<%= @cname %>-meta-<%= p %>" name="<%= p %>" value="<%= v %>"/>
 <%   } -%>
+  <nvpair id="<%= @cname %>-meta-target-role" name="target-role" value="<%= @targetrole %>"/>
 </meta_attributes>
 <% end -%>
-<primitive class="<%= @class %>" id="<%= @pname %>" <%= "provider=\"#{@provider}\" " if not @provider.nil? %>type="<%= @type %>">
+<primitive class="<%= @scriptclass %>" id="<%= @pname %>" <%= "provider=\"#{@provider}\" " if not @provider.nil? %>type="<%= @type %>">
 <% if @operations.is_a?(Hash) and @operations.size != 0 -%>
   <operations>
 <%   @operations.each { |op,properties| -%>
