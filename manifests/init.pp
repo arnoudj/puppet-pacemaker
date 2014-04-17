@@ -25,12 +25,19 @@
 # [*members*]
 #   IP addresses of the nodes in the cluster. Only used when unicast is used
 #   as the transport mechanism (multicast set to false).
-#   Defaults value is [].
+#   Default value is [].
+#
+# [*options*]
+#   Options to be passed to pacemaker.
+#   default value is {}.
 #
 # === Examples
 #
 #  class { pacemaker:
 #    bindnetaddr => $ipaddress_eth1
+#    options     => {
+#      stonith-enable => { value => 'false' }
+#    }
 #  }
 #
 # === Authors
@@ -46,7 +53,8 @@ class pacemaker (
   $mcastaddr   = '226.94.1.1',
   $mcastport   = 5405,
   $multicast   = true,
-  $members     = []
+  $members     = [],
+  $options     = {},
 ) inherits ::pacemaker::params
 {
   package { 'corosync':
@@ -81,4 +89,6 @@ class pacemaker (
     ensure  => 'installed',
     name    => $pacemaker::params::pacemaker_package,
   }
+
+  create_resources(::pacemaker::option, $options)
 }
