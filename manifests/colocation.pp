@@ -47,7 +47,7 @@ define pacemaker::colocation (
   }
   ~>
   exec { "load p_${name}.xml":
-    command     => "cibadmin --modify --obj_type constraints --xml-file /etc/corosync/xml/c_${name}.xml",
+    command     => "cibadmin --replace --obj_type constraints --xml-file /etc/corosync/xml/c_${name}.xml || (rm /etc/corosync/xml/c_${name}.xml; exit 1)",
     unless      => "cibadmin --create --obj_type constraints --xml-file /etc/corosync/xml/c_${name}.xml 2>/dev/null",
     path        => '/bin:/sbin:/usr/bin:/usr/sbin',
     refreshonly => true,
