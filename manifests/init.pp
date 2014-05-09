@@ -62,6 +62,11 @@ class pacemaker (
     name    => $pacemaker::params::corosync_package,
   }
   ->
+  package { 'pacemaker':
+    ensure  => 'installed',
+    name    => $pacemaker::params::pacemaker_package,
+  }
+  ->
   file { '/etc/corosync/xml':
     ensure  => 'directory'
   }
@@ -76,6 +81,11 @@ class pacemaker (
     enable  => true,
     name    => $pacemaker::params::corosync_service,
   }
+  ~>
+  service { 'pacemaker':
+    ensure  => 'running',
+    enable  => 'true',
+  }
 
   if $::osfamily == debian {
     file { '/etc/default/corosync':
@@ -83,11 +93,6 @@ class pacemaker (
       notify  => Service['corosync'],
       require => Package['corosync'],
     }
-  }
-
-  package { 'pacemaker':
-    ensure  => 'installed',
-    name    => $pacemaker::params::pacemaker_package,
   }
 
   create_resources(::pacemaker::option, $options)

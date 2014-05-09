@@ -85,9 +85,10 @@ define pacemaker::primitive (
   }
   ~>
   exec { "load p_${name}.xml":
-    command     => "cibadmin --replace --obj_type resources --xml-file /etc/corosync/xml/p_${name}.xml || (rm /etc/corosync/xml/p_${name}.xml; exit 1)",
+    command     => "cibadmin --replace --obj_type resources --xml-file /etc/corosync/xml/p_${name}.xml || (mv /etc/corosync/xml/p_${name}.xml /etc/corosync/xml/p_${name}.xml.failed; exit 1)",
     unless      => "cibadmin --create --obj_type resources --xml-file /etc/corosync/xml/p_${name}.xml 2>/dev/null",
     path        => '/bin:/sbin:/usr/bin:/usr/sbin',
     refreshonly => true,
+    require     => Package['pacemaker'],
   }
 }

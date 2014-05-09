@@ -39,5 +39,6 @@ define pacemaker::order (
     unless      => "cibadmin --create --obj_type constraints --xml-file /etc/corosync/xml/o_${name}.xml 2>/dev/null",
     path        => '/bin:/sbin:/usr/bin:/usr/sbin',
     refreshonly => true,
+    require     => Package['pacemaker'],
   }
 }
