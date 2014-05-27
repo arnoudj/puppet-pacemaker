@@ -96,4 +96,6 @@ class pacemaker (
   }
 
   create_resources(::pacemaker::option, $options)
+
+  Pacemaker::Primitive<||> -> Pacemaker::Colocation<||> -> Pacemaker::Order<||>
 }
