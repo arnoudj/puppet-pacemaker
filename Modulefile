@@ -8,4 +8,3 @@ project_page 'http://github.com/arnoudj/puppet-pacemaker'
 
 ## Add dependencies, if any:
 # dependency 'username/name', '>= 1.2.0'
-dependency 'dalen/puppetdbquery', '>= 1.4.0'
