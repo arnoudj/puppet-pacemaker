@@ -1,9 +1,7 @@
-<constraints>
-    <rsc_colocation id="<%= @name %>" score="<%= @score.to_s %>" >
-      <resource_set id="<%= @name %>-set" sequential="<%= @sequential.to_s %>">
+<rsc_colocation id="<%= @name %>" score="<%= @score.to_s %>" >
+  <resource_set id="<%= @name %>-set" sequential="<%= @sequential.to_s %>">
 <% @resources.each { |r| -%>
-        <resource_ref id="<%= r %>"/>
+    <resource_ref id="<%= r %>"/>
 <% } -%>
-      </resource_set>
-    </rsc_colocation>
-</constraints>
+  </resource_set>
+</rsc_colocation>
