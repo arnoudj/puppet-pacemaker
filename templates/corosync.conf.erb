@@ -1,31 +1,33 @@
 #### MANAGED BY PUPPET ####
 totem {
-	version: 2
-	token: 3000
-	token_retransmits_before_loss_const: 10
-	join: 60
-	consensus: 3600
-	vsftype: none
-	max_messages: 20
-	clear_node_high_bit: yes
- 	secauth: off
- 	threads: 0
- 	rrp_mode: none
+        version: 2
+        token: 3000
+        token_retransmits_before_loss_const: 10
+        join: 60
+        consensus: 3600
+        vsftype: none
+        max_messages: 20
+        clear_node_high_bit: yes
+        secauth: off
+        threads: 0
+        rrp_mode: none
 
- 	interface {
-		ringnumber: 0
-		bindnetaddr: <%= @bindnetaddr %>
-		mcastaddr: <%= @mcastaddr %>
-		mcastport: <%= @mcastport %>
+        interface {
+                ringnumber: 0
+                bindnetaddr: <%= @bindnetaddr %>
+                mcastaddr: <%= @mcastaddr %>
+                mcastport: <%= @mcastport %>
 <% if ! @multicast -%>
-                transport: udpu
 <%   @members.each { |m| -%>
                 member {
-                    memberaddr: <%= m %>
+                        memberaddr: <%= m %>
                 }
 <%   } -%>
 <% end -%>
-	}
+        }
+<% if ! @multicast -%>
+        transport: udpu
+<% end -%>
 }
 
 quorum {
@@ -34,12 +36,12 @@ quorum {
 }
 
 amf {
-	mode: disabled
+        mode:   disabled
 }
 
 service {
- 	ver:       0
- 	name:      pacemaker
+         ver:   0
+         name:  pacemaker
 }
 
 aisexec {
@@ -52,7 +54,7 @@ logging {
         to_stderr: yes
         to_logfile: no
         to_syslog: yes
-	syslog_facility: daemon
+        syslog_facility: daemon
         debug: off
         timestamp: on
         logger_subsys {

@@ -8,7 +8,7 @@ Pacemaker with Corosync. No other configurations are supported.
     class { 'pacemaker': }
 
     pacemaker::primitive { 'vip':
-      class       => 'ocf',
+      scriptclass => 'ocf',
       provider    => 'heartbeat',
       type        => 'ipaddr2',
       operations  => {
