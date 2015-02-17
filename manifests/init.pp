@@ -34,7 +34,7 @@
 # === Examples
 #
 #  class { pacemaker:
-#    bindnetaddr => $ipaddress_eth1
+#    bindnetaddr => $network_eth1
 #    options     => {
 #      stonith-enable => { value => 'false' }
 #    }
@@ -49,7 +49,7 @@
 # Copyright 2014 Cyso.
 #
 class pacemaker (
-  $bindnetaddr = $ipaddress,
+  $bindnetaddr = $network_eth0,
   $mcastaddr   = '226.94.1.1',
   $mcastport   = 5405,
   $multicast   = true,
